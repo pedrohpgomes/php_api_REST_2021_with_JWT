@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client JWT login</title>
+</head>
+<body>
+    <script src='./js/jquery-3.6.0.min.js'></script>
+    <script>
+        var user_email = 'teste@gmail.com';
+        var user_password = '123';
+
+        function loginApi(){
+            $.ajax({
+                url: "http://localhost/PHP_API_REST_2021_with_JWT/public_html/api/auth/login",
+                method: 'POST',
+                data: {'email' : user_email, 'password' : user_password}
+                })
+                .done(function( data ) {
+                    //console.log(data);
+                    localStorage.setItem('user_token_jwt', data.data);
+            });
+        }
+
+        function get(id=null){
+            $.ajax({
+                url: "http://localhost/PHP_API_REST_2021_with_JWT/public_html/api/user",
+                method: 'GET',
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('user_token_jwt') }
+            })
+            .done(function( data ) {
+                console.log(data);
+            });
+        }
+
+    </script>
+</body>
+</html>

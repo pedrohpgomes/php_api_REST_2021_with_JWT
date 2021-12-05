@@ -3,14 +3,14 @@
 
     use App\Models\User;
 
-    class UserService {
+    class UserService {    
 
         public function get($id=null){
-            if($id){
-                return User::select($id);
-            } else{
-                return User::selectAll();
-            }
+                if($id){
+                    return User::select($id);
+                } else{
+                    return User::selectAll();
+                }
         }
 
 
